@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Azzurro Recruitment — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+body{background:#f5f7fa}.admin-shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}.sidebar{background:#0d1526;color:#fff;padding:26px 18px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.sidebar .logo{color:white;margin-bottom:38px}.side-label{font-size:9px;letter-spacing:.14em;color:#61708e;font-weight:800;margin:16px 10px 8px}.side-nav a,.side-nav button{width:100%;border:0;background:none;text-align:left;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;color:#9ca7bb;font-size:12px;font-weight:700;margin:4px 0}.side-nav a.active{background:#17243d;color:white}.side-nav span{width:24px;color:#7890ff}.sidebar-bottom{margin-top:auto;padding-top:20px;border-top:1px solid #22304a}.admin-main{padding:32px 34px;min-width:0}.admin-header{display:flex;justify-content:space-between;align-items:center;gap:18px}.admin-header h1{font:800 36px Manrope;letter-spacing:-.04em;margin:3px 0}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}.metric{background:#fff;border:1px solid #e4e7ec;border-radius:17px;padding:19px}.metric span{font-size:10px;color:#667085;font-weight:700}.metric b{display:block;font:800 30px Manrope;margin-top:8px}.panel{background:#fff;border:1px solid #e4e7ec;border-radius:18px;overflow:hidden}.panel-head{display:flex;justify-content:space-between;align-items:center;padding:18px;gap:12px}.panel-head h2{font:800 17px Manrope;margin:0}.filters{display:flex;gap:8px;padding:0 18px 14px;flex-wrap:wrap}.filters input,.filters select{max-width:220px;padding:10px;font-size:11px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:930px}th,td{text-align:left;border-top:1px solid #eef0f3;padding:14px 18px;font-size:11px}th{font-size:9px;letter-spacing:.08em;color:#98a2b3;text-transform:uppercase}.person{display:flex;gap:10px;align-items:center}.avatar{width:36px;height:36px;border-radius:11px;background:#eef2ff;color:#3157e7;display:grid;place-items:center;font-weight:800;flex:0 0 auto}.person b{display:block}.person small{color:#98a2b3}.badge{padding:6px 9px;border-radius:999px;background:#eef2ff;color:#3157e7;font-size:9px;font-weight:800;white-space:nowrap}.review{border:1px solid #d0d5dd;background:#fff;border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800}.empty{padding:50px;text-align:center;color:#667085}.admin-user{display:flex;gap:10px;align-items:center}.admin-user .avatar{background:#e8edff}
+.modal-backdrop{position:fixed;inset:0;background:rgba(13,21,38,.64);z-index:100;display:grid;place-items:center;padding:22px;backdrop-filter:blur(5px)}.review-modal{width:min(1040px,100%);max-height:92vh;overflow:auto;background:#f7f8fa;border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.3)}.review-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:1px solid #e4e7ec;padding:20px 24px}.review-head h2{font:800 24px Manrope;margin:0}.close{width:38px;height:38px;border:1px solid #e4e7ec;background:#fff;border-radius:11px;font-size:20px}.review-body{padding:20px;display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px}.review-card{background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:18px}.review-card h3{font:800 15px Manrope;margin:0 0 14px}.detail-list{display:grid;gap:12px}.detail-list div{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #f0f1f3;padding-bottom:9px}.detail-list span{font-size:10px;color:#667085}.detail-list b{font-size:11px;text-align:right}.video-answer{border:1px solid #e4e7ec;border-radius:14px;padding:14px;margin-bottom:12px}.video-answer .qnum{font-size:9px;letter-spacing:.12em;color:#3157e7;font-weight:800}.video-answer p{font-size:12px;line-height:1.55;color:#344054}.video-answer video{width:100%;border-radius:10px;background:#0d1526;max-height:340px}.status-controls{display:grid;gap:10px}.status-controls textarea{width:100%;min-height:120px;border:1px solid #d0d5dd;border-radius:11px;padding:12px;font:inherit;resize:vertical}.resume-link{width:100%;margin-top:12px}.loading{padding:35px;text-align:center;color:#667085}
+.mobile-adminbar{display:none}
+@media(max-width:900px){.admin-shell{grid-template-columns:1fr}.sidebar{display:none}.mobile-adminbar{display:flex;align-items:center;justify-content:space-between;background:#0d1526;color:#fff;padding:13px 16px;position:sticky;top:0;z-index:20}.mobile-adminbar .logo-copy small{display:none}.admin-main{padding:20px 14px 40px}.metrics{grid-template-columns:1fr 1fr}.admin-user{display:none}.review-body{grid-template-columns:1fr}.review-modal{max-height:95vh}.modal-backdrop{padding:8px}.review-head{padding:15px}.review-head h2{font-size:19px}}
+@media(max-width:520px){.admin-header h1{font-size:29px}.metrics{gap:8px}.metric{padding:14px}.metric b{font-size:25px}.panel-head{align-items:flex-start}.filters>*{max-width:none!important;flex:1 1 100%}.review-body{padding:10px}.review-card{padding:14px}}
+</style></head>
+<body>
+<div class="mobile-adminbar"><a class="logo" href="index.html"><span class="logo-mark">A</span><span class="logo-copy"><b>AZZURRO</b><small>RECRUITMENT</small></span></a><button id="mobileLogout" class="button button-light">Sign out</button></div>
+<div class="admin-shell">
+<aside class="sidebar">
+<a class="logo" href="index.html"><span class="logo-mark">A</span><span class="logo-copy"><b style="color:white">AZZURRO</b><small>RECRUITMENT</small></span></a>
+<div class="side-label">WORKSPACE</div><nav class="side-nav"><a class="active"><span>◫</span>Applicants</a><a><span>↝</span>Pipeline</a><a><span>◉</span>Interviews</a></nav>
+<div class="sidebar-bottom side-nav"><a href="index.html"><span>↗</span>Applicant site</a><button id="logout"><span>⇥</span>Sign out</button></div>
+</aside>
+<main class="admin-main">
+<header class="admin-header"><div><span class="section-index">RECRUITMENT DASHBOARD</span><h1>Housekeeping applicants</h1></div><div class="admin-user"><span class="avatar">A</span><div><b>Admin001</b><small>Azzurro Hotels</small></div></div></header>
+<section class="metrics"><div class="metric"><span>TOTAL APPLICANTS</span><b id="total">—</b></div><div class="metric"><span>INTERVIEW COMPLETE</span><b id="complete">—</b></div><div class="metric"><span>SHORTLISTED</span><b id="shortlisted">—</b></div><div class="metric"><span>FOR TRIAL</span><b id="trial">—</b></div></section>
+<section class="panel"><div class="panel-head"><div><h2>Applicants</h2><small style="color:#667085">Live data from Supabase</small></div><button id="refresh" class="button button-primary">Refresh</button></div>
+<div class="filters"><input id="search" placeholder="Search name or email"><select id="status"><option value="">All statuses</option><option>New</option><option>For Review</option><option>Shortlisted</option><option>Trial</option><option>Hired</option><option>Rejected</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>Applicant</th><th>Mobile</th><th>WhatsApp</th><th>Location</th><th>Experience</th><th>Interview</th><th>Status</th><th></th></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty hidden">No applicants found.</div></div></section>
+</main></div>
+
+<div id="reviewBackdrop" class="modal-backdrop hidden">
+  <section class="review-modal">
+    <header class="review-head"><div><span class="section-index">APPLICANT REVIEW</span><h2 id="reviewName">Applicant</h2></div><button id="closeReview" class="close">×</button></header>
+    <div id="reviewLoading" class="loading">Loading application…</div>
+    <div id="reviewBody" class="review-body hidden">
+      <div>
+        <article class="review-card">
+          <h3>Applicant details</h3><div id="detailList" class="detail-list"></div>
+          <button id="resumeBtn" class="button button-secondary resume-link">Open resume ↗</button>
+        </article>
+        <article class="review-card" style="margin-top:16px">
+          <h3>Decision & notes</h3>
+          <div class="status-controls">
+            <select id="reviewStatus"><option>New</option><option>For Review</option><option>Shortlisted</option><option>Trial</option><option>Hired</option><option>Rejected</option></select>
+            <textarea id="reviewNotes" placeholder="Internal manager notes…"></textarea>
+            <button id="saveReview" class="button button-primary">Save review</button>
+          </div>
+        </article>
+      </div>
+      <article class="review-card"><h3>Video interview</h3><div id="videoAnswers"></div></article>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
+<script>
+const sb=window.supabase.createClient(AZZURRO_CONFIG.SUPABASE_URL,AZZURRO_CONFIG.SUPABASE_ANON_KEY);
+let apps=[],responseCounts={},activeApplicant=null;
+
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+async function guard(){
+ const {data}=await sb.auth.getSession();
+ if(!data.session){location.href="admin-login.html";return false}
+ if((data.session.user.email||"").toLowerCase()!=="admin001@azzurro.local"){await sb.auth.signOut();location.href="admin-login.html";return false}
+ return true;
+}
+async function load(){
+ if(!(await guard()))return;
+ document.getElementById("empty").classList.add("hidden");
+ const [{data,error},{data:responses,error:rerr}]=await Promise.all([
+   sb.from("applications").select("*").order("created_at",{ascending:false}),
+   sb.from("interview_responses").select("application_id,question_number")
+ ]);
+ if(error||rerr){console.error(error||rerr);document.getElementById("empty").textContent="Could not load applicants. Check Supabase setup and admin access.";document.getElementById("empty").classList.remove("hidden");return}
+ apps=data||[];responseCounts={};
+ (responses||[]).forEach(r=>responseCounts[r.application_id]=(responseCounts[r.application_id]||0)+1);
+ render();
+}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase(),st=document.getElementById("status").value;
+ const filtered=apps.filter(a=>(!st||a.status===st)&&(`${a.first_name} ${a.last_name} ${a.email}`.toLowerCase().includes(q)));
+ document.getElementById("total").textContent=apps.length;
+ document.getElementById("complete").textContent=apps.filter(a=>(responseCounts[a.id]||0)===5).length;
+ document.getElementById("shortlisted").textContent=apps.filter(a=>a.status==="Shortlisted").length;
+ document.getElementById("trial").textContent=apps.filter(a=>a.status==="Trial").length;
+ document.getElementById("rows").innerHTML=filtered.map(a=>`<tr>
+ <td><div class="person"><span class="avatar">${esc((a.first_name?.[0]||"")+(a.last_name?.[0]||""))}</span><div><b>${esc(a.first_name)} ${esc(a.last_name)}</b><small>${esc(a.email)}</small></div></div></td>
+ <td>${esc(a.mobile||"—")}</td><td>${esc(a.whatsapp||"—")}</td><td>${esc(a.suburb||"—")}</td><td>${esc(a.experience||"—")}</td>
+ <td>${responseCounts[a.id]||0} / 5</td><td><span class="badge">${esc(a.status)}</span></td>
+ <td><button class="review" data-review="${esc(a.id)}">Review →</button></td></tr>`).join("");
+ document.getElementById("empty").classList.toggle("hidden",filtered.length>0);
+ document.querySelectorAll("[data-review]").forEach(b=>b.addEventListener("click",()=>openReview(b.dataset.review)));
+}
+async function signed(bucket,path){
+ if(!path)return null;
+ const {data,error}=await sb.storage.from(bucket).createSignedUrl(path,3600);
+ if(error){console.error(error);return null}
+ return data.signedUrl;
+}
+async function openReview(id){
+ activeApplicant=apps.find(a=>a.id===id); if(!activeApplicant)return;
+ document.getElementById("reviewBackdrop").classList.remove("hidden");
+ document.body.style.overflow="hidden";
+ document.getElementById("reviewName").textContent=`${activeApplicant.first_name} ${activeApplicant.last_name}`;
+ document.getElementById("reviewLoading").classList.remove("hidden");
+ document.getElementById("reviewBody").classList.add("hidden");
+ const {data:responses,error}=await sb.from("interview_responses").select("*").eq("application_id",id).order("question_number");
+ if(error){alert("Could not load interview responses.");closeReview();return}
+ document.getElementById("detailList").innerHTML=[
+  ["Email",activeApplicant.email],["Mobile",activeApplicant.mobile],["WhatsApp",activeApplicant.whatsapp],
+  ["Suburb",activeApplicant.suburb],["Experience",activeApplicant.experience],
+  ["Weekends",activeApplicant.weekends?"Yes":"No"],["Public holidays",activeApplicant.public_holidays?"Yes":"No"],
+  ["Most days",activeApplicant.most_days?"Yes":"No"],["Start date",activeApplicant.start_date||"Not provided"],
+  ["Work rights",activeApplicant.australian_work_rights?"Yes":"No"],["TFN",activeApplicant.tfn_eligible?"Yes":"No"]
+ ].map(([k,v])=>`<div><span>${esc(k)}</span><b>${esc(v||"—")}</b></div>`).join("");
+ const resumeBtn=document.getElementById("resumeBtn");
+ const resumeUrl=await signed("resumes",activeApplicant.resume_path);
+ resumeBtn.disabled=!resumeUrl;resumeBtn.onclick=()=>resumeUrl&&window.open(resumeUrl,"_blank","noopener");
+ document.getElementById("reviewStatus").value=activeApplicant.status||"New";
+ document.getElementById("reviewNotes").value=activeApplicant.admin_notes||"";
+ const cards=[];
+ for(const r of responses||[]){
+   const url=await signed("interview-videos",r.video_path);
+   cards.push(`<div class="video-answer"><span class="qnum">QUESTION ${r.question_number} · ${esc(r.category)}</span><p>${esc(r.question)}</p>${url?`<video controls playsinline preload="metadata" src="${url}"></video>`:`<div class="empty">Video unavailable</div>`}</div>`);
+ }
+ document.getElementById("videoAnswers").innerHTML=cards.length?cards.join(""):'<div class="empty">No interview answers uploaded yet.</div>';
+ document.getElementById("reviewLoading").classList.add("hidden");document.getElementById("reviewBody").classList.remove("hidden");
+}
+function closeReview(){document.getElementById("reviewBackdrop").classList.add("hidden");document.body.style.overflow="";activeApplicant=null}
+document.getElementById("closeReview").addEventListener("click",closeReview);
+document.getElementById("reviewBackdrop").addEventListener("click",e=>{if(e.target===e.currentTarget)closeReview()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeReview()});
+document.getElementById("saveReview").addEventListener("click",async()=>{
+ if(!activeApplicant)return;const btn=document.getElementById("saveReview");btn.disabled=true;btn.textContent="Saving…";
+ const status=document.getElementById("reviewStatus").value,notes=document.getElementById("reviewNotes").value;
+ const {error}=await sb.from("applications").update({status,admin_notes:notes}).eq("id",activeApplicant.id);
+ if(error){alert("Could not save review.");console.error(error)}else{activeApplicant.status=status;activeApplicant.admin_notes=notes;render();btn.textContent="Saved ✓";setTimeout(()=>btn.textContent="Save review",1200)}
+ btn.disabled=false;
+});
+document.getElementById("search").addEventListener("input",render);document.getElementById("status").addEventListener("change",render);document.getElementById("refresh").addEventListener("click",load);
+async function logout(){await sb.auth.signOut();location.href="admin-login.html"}
+document.getElementById("logout").addEventListener("click",logout);document.getElementById("mobileLogout").addEventListener("click",logout);
+load();
+</script></body></html>

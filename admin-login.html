@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Azzurro Recruitment — Admin Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.login-page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:#f7f8fa}
+.login-brand{background:#0d1526;color:#fff;padding:7vw;display:flex;flex-direction:column;justify-content:space-between}
+.login-brand h1{font:800 56px/1 Manrope;letter-spacing:-.05em;max-width:540px}
+.login-brand p{color:#9ba8bd;line-height:1.7;max-width:480px}
+.login-side{display:grid;place-items:center;padding:30px}
+.login-card{width:min(430px,100%);background:#fff;border:1px solid #e4e7ec;border-radius:22px;padding:34px;box-shadow:var(--shadow)}
+.login-card h2{font:800 30px Manrope;letter-spacing:-.04em;margin:8px 0}.login-card>p{color:#667085;font-size:13px;line-height:1.6;margin-bottom:26px}
+.login-error{background:#fef3f2;border:1px solid #fecdca;color:#b42318;padding:12px;border-radius:10px;font-size:11px;margin-bottom:14px}
+@media(max-width:800px){.login-page{grid-template-columns:1fr}.login-brand{display:none}}
+</style></head>
+<body>
+<div class="login-page">
+<section class="login-brand">
+<a class="logo" href="index.html"><span class="logo-mark">A</span><span class="logo-copy"><b style="color:white">AZZURRO</b><small>RECRUITMENT</small></span></a>
+<div><span class="section-index" style="color:#8fa5ff">ADMIN PORTAL</span><h1>Hire with a clearer view.</h1><p>Review applications, resumes and all five interview responses from one secure recruitment workspace.</p></div>
+<small style="color:#59677f">Azzurro Hotels Sydney · Internal use only</small>
+</section>
+<section class="login-side">
+<form id="loginForm" class="login-card">
+<span class="section-index">SECURE ACCESS</span><h2>Welcome back.</h2><p>Sign in to review Housekeeping Attendant applications.</p>
+<div id="loginError" class="login-error hidden"></div>
+<div class="field-group"><label>Username</label><input id="username" autocomplete="username" required placeholder="Admin username"></div>
+<div class="field-group"><label>Password</label><input id="password" type="password" autocomplete="current-password" required placeholder="••••••••••••"></div>
+<button class="button button-primary button-large full" type="submit">Sign in <span>→</span></button>
+</form>
+</section></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
+<script>
+const sb=window.supabase.createClient(AZZURRO_CONFIG.SUPABASE_URL,AZZURRO_CONFIG.SUPABASE_ANON_KEY);
+const ADMIN_USER="Admin001";
+const ADMIN_EMAIL="admin001@azzurro.local";
+document.getElementById("loginForm").addEventListener("submit",async(e)=>{
+ e.preventDefault();const btn=e.submitter;const box=document.getElementById("loginError");
+ box.classList.add("hidden");
+ if(document.getElementById("username").value.trim()!==ADMIN_USER){box.textContent="Invalid username or password.";box.classList.remove("hidden");return}
+ btn.disabled=true;btn.textContent="Signing in…";
+ const {error}=await sb.auth.signInWithPassword({email:ADMIN_EMAIL,password:document.getElementById("password").value});
+ if(error){box.textContent="Invalid username or password, or the admin account has not been created in Supabase Auth yet.";box.classList.remove("hidden");btn.disabled=false;btn.textContent="Sign in →";return}
+ location.href="admin.html";
+});
+(async()=>{const {data}=await sb.auth.getSession();if(data.session)location.href="admin.html"})();
+</script></body></html>

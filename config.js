@@ -1,0 +1,4 @@
+window.AZZURRO_CONFIG = {
+  SUPABASE_URL: "https://emvzcukpcypyuxxagfxj.supabase.co",
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtdnpjdWtwY3lweXV4eGFnZnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxODMxNjQsImV4cCI6MjEwMjc1OTE2NH0.WWmhN0b0FY6K-f8gAhmWbsjdwIWN_7xkALv47lastv0"
+};
