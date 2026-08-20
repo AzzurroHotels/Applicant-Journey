@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Azzurro Recruitment — Admin Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body{background:#f5f7fa}
+    .admin-shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+    .sidebar{background:#0d1526;color:#fff;padding:26px 18px;display:flex;flex-direction:column}
+    .sidebar .logo{color:white;margin-bottom:38px}
+    .side-label{font-size:9px;letter-spacing:.14em;color:#61708e;font-weight:800;margin:16px 10px 8px}
+    .side-nav a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;color:#9ca7bb;font-size:12px;font-weight:700;margin:4px 0}
+    .side-nav a.active{background:#17243d;color:white}
+    .side-nav a span{width:24px;color:#7890ff}
+    .sidebar-bottom{margin-top:auto;padding-top:20px;border-top:1px solid #22304a}
+    .admin-main{padding:32px 34px}
+    .admin-header{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .admin-header h1{font:800 36px Manrope;letter-spacing:-.04em;margin:3px 0 0}
+    .admin-user{display:flex;align-items:center;gap:10px}
+    .admin-avatar{width:38px;height:38px;border-radius:12px;background:#e8edff;color:#3157e7;display:grid;place-items:center;font-weight:800}
+    .admin-user small{display:block;color:#667085}
+    .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}
+    .metric-card{background:white;border:1px solid #e4e7ec;border-radius:17px;padding:19px}
+    .metric-card span{font-size:10px;color:#667085;font-weight:700}
+    .metric-card strong{display:block;font:800 30px Manrope;margin-top:8px}
+    .metric-card small{font-size:9px;color:#98a2b3}
+    .content-grid{display:grid;grid-template-columns:1fr 300px;gap:16px}
+    .panel{background:#fff;border:1px solid #e4e7ec;border-radius:18px}
+    .panel-head{display:flex;justify-content:space-between;align-items:center;padding:18px 18px 12px}
+    .panel-head h2{font:800 17px Manrope;margin:0}
+    .panel-head p{font-size:10px;color:#667085;margin:3px 0 0}
+    .filters{display:flex;gap:8px;padding:0 18px 14px}
+    .filters input,.filters select{max-width:220px;padding:10px 11px;font-size:11px}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:800px}
+    th,td{text-align:left;border-top:1px solid #eef0f3;padding:14px 18px;font-size:11px}
+    th{font-size:9px;letter-spacing:.08em;color:#98a2b3;text-transform:uppercase}
+    .person{display:flex;gap:10px;align-items:center}
+    .person-avatar{width:36px;height:36px;border-radius:11px;background:#eef2ff;color:#3157e7;display:grid;place-items:center;font-weight:800}
+    .person b{display:block}.person small{color:#98a2b3}
+    .badge{display:inline-flex;padding:6px 9px;border-radius:999px;font-size:9px;font-weight:800}
+    .badge-new{background:#fff7e6;color:#8b5e00}
+    .badge-short{background:#ecfdf3;color:#067647}
+    .badge-progress{background:#eef2ff;color:#3157e7}
+    .review-btn{border:1px solid #d0d5dd;background:white;border-radius:9px;padding:8px 10px;font-weight:800;font-size:10px}
+    .pipeline{padding:4px 18px 18px}
+    .pipe-item{padding:14px 0;border-top:1px solid #eef0f3}
+    .pipe-item:first-child{border-top:0}
+    .pipe-row{display:flex;justify-content:space-between;font-size:11px;font-weight:700}
+    .pipe-bar{height:7px;border-radius:99px;background:#eef0f3;margin-top:8px;overflow:hidden}
+    .pipe-bar i{display:block;height:100%;background:#3157e7;border-radius:99px}
+    .recent{padding:0 18px 18px}
+    .recent-item{display:flex;gap:10px;padding:12px 0;border-top:1px solid #eef0f3}
+    .recent-item:first-child{border-top:0}
+    .recent-item p{font-size:10px;line-height:1.4;margin:0;color:#475467}
+    .recent-item small{color:#98a2b3}
+    @media(max-width:1050px){.content-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:760px){.admin-shell{grid-template-columns:1fr}.sidebar{display:none}.admin-main{padding:20px}.metric-grid{grid-template-columns:1fr 1fr}.admin-header{align-items:flex-start}.admin-user{display:none}}
+  </style>
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">A</span>
+        <span class="logo-copy"><b>AZZURRO</b><small>RECRUITMENT</small></span>
+      </a>
+
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav">
+        <a class="active"><span>◫</span> Applicants</a>
+        <a><span>↝</span> Pipeline</a>
+        <a><span>◉</span> Interviews</a>
+      </nav>
+
+      <div class="side-label">MANAGE</div>
+      <nav class="side-nav">
+        <a><span>⌁</span> Job posting</a>
+        <a><span>⚙</span> Settings</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="index.html" class="side-nav"><span>↗</span> View applicant site</a>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <span class="section-index">RECRUITMENT DASHBOARD</span>
+          <h1>Housekeeping applicants</h1>
+        </div>
+        <div class="admin-user">
+          <div class="admin-avatar">AB</div>
+          <div><b>Admin</b><small>Azzurro Hotels</small></div>
+        </div>
+      </header>
+
+      <section class="metric-grid">
+        <article class="metric-card"><span>TOTAL APPLICANTS</span><strong>24</strong><small>All applications</small></article>
+        <article class="metric-card"><span>INTERVIEW COMPLETE</span><strong>18</strong><small>75% completion</small></article>
+        <article class="metric-card"><span>SHORTLISTED</span><strong>6</strong><small>Ready for review</small></article>
+        <article class="metric-card"><span>FOR TRIAL</span><strong>3</strong><small>Next stage</small></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h2>Applicants</h2><p>Review eligibility, resume and video interview responses.</p></div>
+            <button class="button button-primary">Export</button>
+          </div>
+          <div class="filters">
+            <input placeholder="Search applicant">
+            <select><option>All statuses</option><option>New</option><option>Shortlisted</option><option>For trial</option></select>
+            <select><option>All experience</option><option>1–2 years</option><option>2–5 years</option></select>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Applicant</th><th>Location</th><th>Experience</th><th>Availability</th><th>Interview</th><th>Status</th><th></th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="person"><span class="person-avatar">JM</span><div><b>Jessica Martin</b><small>jessica@example.com</small></div></div></td>
+                  <td>Haymarket</td><td>2–5 years</td><td>Weekends + PH</td><td>5 / 5 complete</td><td><span class="badge badge-new">New</span></td><td><button class="review-btn">Review →</button></td>
+                </tr>
+                <tr>
+                  <td><div class="person"><span class="person-avatar">AK</span><div><b>Arun Kumar</b><small>arun@example.com</small></div></div></td>
+                  <td>Ultimo</td><td>1–2 years</td><td>Most days</td><td>5 / 5 complete</td><td><span class="badge badge-short">Shortlisted</span></td><td><button class="review-btn">Review →</button></td>
+                </tr>
+                <tr>
+                  <td><div class="person"><span class="person-avatar">MS</span><div><b>Maria Santos</b><small>maria@example.com</small></div></div></td>
+                  <td>Pyrmont</td><td>1–2 years</td><td>Weekends</td><td>3 / 5 complete</td><td><span class="badge badge-progress">In progress</span></td><td><button class="review-btn">Review →</button></td>
+                </tr>
+                <tr>
+                  <td><div class="person"><span class="person-avatar">DL</span><div><b>David Lee</b><small>david@example.com</small></div></div></td>
+                  <td>Surry Hills</td><td>5+ years</td><td>Most days + PH</td><td>5 / 5 complete</td><td><span class="badge badge-new">New</span></td><td><button class="review-btn">Review →</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside>
+          <div class="panel">
+            <div class="panel-head"><div><h2>Pipeline</h2><p>Current applicant movement.</p></div></div>
+            <div class="pipeline">
+              <div class="pipe-item"><div class="pipe-row"><span>New</span><b>9</b></div><div class="pipe-bar"><i style="width:78%"></i></div></div>
+              <div class="pipe-item"><div class="pipe-row"><span>For review</span><b>6</b></div><div class="pipe-bar"><i style="width:56%"></i></div></div>
+              <div class="pipe-item"><div class="pipe-row"><span>Shortlisted</span><b>6</b></div><div class="pipe-bar"><i style="width:56%"></i></div></div>
+              <div class="pipe-item"><div class="pipe-row"><span>For trial</span><b>3</b></div><div class="pipe-bar"><i style="width:28%"></i></div></div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:16px">
+            <div class="panel-head"><div><h2>Recent activity</h2><p>Latest recruitment updates.</p></div></div>
+            <div class="recent">
+              <div class="recent-item"><span class="person-avatar">JM</span><div><p><b>Jessica Martin</b> completed all 5 interview questions.</p><small>12 min ago</small></div></div>
+              <div class="recent-item"><span class="person-avatar">AK</span><div><p><b>Arun Kumar</b> was moved to Shortlisted.</p><small>1 hr ago</small></div></div>
+              <div class="recent-item"><span class="person-avatar">MS</span><div><p><b>Maria Santos</b> started her video interview.</p><small>2 hrs ago</small></div></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
