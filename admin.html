@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Azzurro Recruitment — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+body{background:#f5f7fa;overflow-x:hidden}.hidden{display:none!important}
+.admin-shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+.sidebar{background:#0d1526;color:#fff;padding:26px 18px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.sidebar .logo{color:#fff;margin-bottom:38px}.side-label{font-size:9px;letter-spacing:.14em;color:#61708e;font-weight:800;margin:16px 10px 8px}
+.side-nav button,.side-nav a{width:100%;border:0;background:none;text-align:left;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;color:#9ca7bb;font-size:12px;font-weight:700;margin:4px 0;cursor:pointer}
+.side-nav button.active{background:#17243d;color:#fff}.side-nav span{width:24px;color:#7890ff}.sidebar-bottom{margin-top:auto;padding-top:20px;border-top:1px solid #22304a}
+.mobile-adminbar,.mobile-tabs{display:none}.admin-main{padding:32px 34px;min-width:0}
+.admin-header{display:flex;justify-content:space-between;align-items:center;gap:18px}.admin-header h1{font:800 36px Manrope;letter-spacing:-.04em;margin:3px 0}
+.admin-user{display:flex;gap:10px;align-items:center}.avatar{width:36px;height:36px;border-radius:11px;background:#eef2ff;color:#3157e7;display:grid;place-items:center;font-weight:800;flex:0 0 auto}.admin-user small{display:block;color:#98a2b3}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}.metric{background:#fff;border:1px solid #e4e7ec;border-radius:17px;padding:19px}.metric span{font-size:10px;color:#667085;font-weight:700}.metric b{display:block;font:800 30px Manrope;margin-top:8px}
+.workspace-view{display:none}.workspace-view.active{display:block}.panel{background:#fff;border:1px solid #e4e7ec;border-radius:18px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;padding:18px;gap:12px}.panel-head h2{font:800 17px Manrope;margin:0}.panel-head p{font-size:11px;color:#667085;margin:4px 0 0}
+.filters{display:flex;gap:8px;padding:0 18px 14px;flex-wrap:wrap}.filters input,.filters select{max-width:240px;padding:10px 11px;font-size:11px}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:930px}th,td{text-align:left;border-top:1px solid #eef0f3;padding:14px 18px;font-size:11px}th{font-size:9px;letter-spacing:.08em;color:#98a2b3;text-transform:uppercase}
+.person{display:flex;gap:10px;align-items:center}.person b{display:block}.person small{color:#98a2b3}.badge{display:inline-flex;padding:6px 9px;border-radius:999px;font-size:9px;font-weight:800;white-space:nowrap;background:#eef2ff;color:#3157e7}
+.review-btn{border:1px solid #d0d5dd;background:#fff;border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800}.empty{padding:50px;text-align:center;color:#667085}
+.pipeline-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.pipeline-toolbar h2{font:800 22px Manrope;margin:0}.pipeline-toolbar p{font-size:11px;color:#667085;margin:4px 0 0}
+.pipeline-board{display:grid;grid-template-columns:repeat(6,minmax(220px,1fr));gap:14px;overflow-x:auto;padding-bottom:10px}.pipeline-column{background:#eef1f5;border:1px solid #e0e5eb;border-radius:17px;padding:12px;min-height:430px}
+.pipeline-column-header{display:flex;justify-content:space-between;align-items:center;padding:3px 3px 11px}.pipeline-column-header h3{font:800 12px Manrope;margin:0}.pipeline-count{min-width:26px;height:26px;padding:0 8px;border-radius:999px;background:#fff;display:grid;place-items:center;font-size:10px;font-weight:800;color:#667085}
+.pipeline-dropzone{min-height:360px;border-radius:12px;transition:.15s}.pipeline-dropzone.dragover{outline:2px dashed #7c96ff;outline-offset:3px;background:#e7ecff}
+.candidate-card{background:#fff;border:1px solid #e3e6eb;border-radius:14px;padding:13px;margin-bottom:9px;box-shadow:0 3px 10px rgba(16,24,40,.03);cursor:grab}.candidate-top{display:flex;gap:9px;align-items:center}.candidate-card h4{font-size:11px;margin:0 0 2px}.candidate-card small{font-size:9px;color:#98a2b3}
+.candidate-meta{display:grid;gap:6px;margin:11px 0;padding-top:10px;border-top:1px solid #f0f1f3}.candidate-meta div{display:flex;justify-content:space-between;gap:10px;font-size:9px}.candidate-meta span{color:#98a2b3}.candidate-meta b{text-align:right}
+.candidate-actions{display:flex;gap:6px}.candidate-actions select{flex:1;min-width:0;padding:8px;border:1px solid #d0d5dd;border-radius:9px;font-size:9px}.candidate-actions button{border:1px solid #d0d5dd;background:#fff;border-radius:9px;padding:8px;font-size:9px;font-weight:800}
+.interview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:0 18px 18px}.interview-card{border:1px solid #e4e7ec;border-radius:15px;padding:16px;background:#fff}.interview-card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.interview-card h3{font:800 14px Manrope;margin:0 0 3px}.interview-card p{font-size:10px;color:#667085;margin:0}
+.interview-progress{display:flex;align-items:center;gap:8px;margin:15px 0}.interview-bar{flex:1;height:7px;background:#edf0f4;border-radius:999px;overflow:hidden}.interview-bar i{display:block;height:100%;background:#3157e7;border-radius:999px}.interview-progress b{font-size:10px}
+.interview-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.interview-details div{background:#f8f9fb;border-radius:10px;padding:9px}.interview-details span{display:block;font-size:8px;color:#98a2b3;margin-bottom:3px}.interview-details b{font-size:9px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(13,21,38,.64);z-index:100;display:grid;place-items:center;padding:22px;backdrop-filter:blur(5px)}.review-modal{width:min(1040px,100%);max-height:92vh;overflow:auto;background:#f7f8fa;border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.3)}
+.review-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:1px solid #e4e7ec;padding:20px 24px}.review-head h2{font:800 24px Manrope;margin:0}.close{width:38px;height:38px;border:1px solid #e4e7ec;background:#fff;border-radius:11px;font-size:20px}
+.review-body{padding:20px;display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px}.review-card{background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:18px}.review-card h3{font:800 15px Manrope;margin:0 0 14px}.detail-list{display:grid;gap:12px}.detail-list div{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #f0f1f3;padding-bottom:9px}.detail-list span{font-size:10px;color:#667085}.detail-list b{font-size:11px;text-align:right}
+.video-answer{border:1px solid #e4e7ec;border-radius:14px;padding:14px;margin-bottom:12px}.video-answer .qnum{font-size:9px;letter-spacing:.12em;color:#3157e7;font-weight:800}.video-answer p{font-size:12px;line-height:1.55;color:#344054}.video-answer video{width:100%;border-radius:10px;background:#0d1526;max-height:340px}
+.status-controls{display:grid;gap:10px}.status-controls textarea{width:100%;min-height:120px;border:1px solid #d0d5dd;border-radius:11px;padding:12px;font:inherit;resize:vertical}.resume-link{width:100%;margin-top:12px}.loading{padding:35px;text-align:center;color:#667085}
+@media(max-width:1100px){.interview-grid{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.admin-shell{grid-template-columns:1fr}.sidebar{display:none}.mobile-adminbar{display:flex;align-items:center;justify-content:space-between;background:#0d1526;color:#fff;padding:13px 16px;position:sticky;top:0;z-index:30}.mobile-tabs{display:flex;position:sticky;top:64px;z-index:25;background:#fff;border-bottom:1px solid #e4e7ec;overflow:auto;white-space:nowrap}.mobile-tabs button{border:0;background:none;padding:13px 16px;font-size:11px;font-weight:800;color:#667085;border-bottom:2px solid transparent}.mobile-tabs button.active{color:#3157e7;border-bottom-color:#3157e7}.admin-main{padding:20px 14px 40px}.admin-user{display:none}.review-body{grid-template-columns:1fr}.review-modal{max-height:95vh}.modal-backdrop{padding:8px}.pipeline-board{grid-template-columns:repeat(6,250px)}}
+@media(max-width:640px){.admin-header h1{font-size:28px}.metrics{gap:8px}.metric{padding:14px}.metric b{font-size:25px}.filters>*{max-width:none!important;flex:1 1 100%}.interview-grid{grid-template-columns:1fr;padding:0 12px 12px}.pipeline-toolbar{align-items:flex-start;flex-direction:column}.review-body{padding:10px}.review-card{padding:14px}}
+</style>
+</head>
+<body>
+<div class="mobile-adminbar">
+  <a class="logo" href="index.html"><span class="logo-mark">A</span><span class="logo-copy"><b>AZZURRO</b><small>RECRUITMENT</small></span></a>
+  <button id="mobileLogout" class="button button-light">Sign out</button>
+</div>
+<div class="mobile-tabs">
+  <button class="nav-tab active" data-view="applicants">Applicants</button>
+  <button class="nav-tab" data-view="pipeline">Pipeline</button>
+  <button class="nav-tab" data-view="interviews">Interviews</button>
+</div>
+
+<div class="admin-shell">
+<aside class="sidebar">
+  <a class="logo" href="index.html"><span class="logo-mark">A</span><span class="logo-copy"><b style="color:white">AZZURRO</b><small>RECRUITMENT</small></span></a>
+  <div class="side-label">WORKSPACE</div>
+  <nav class="side-nav">
+    <button class="nav-tab active" data-view="applicants"><span>◫</span>Applicants</button>
+    <button class="nav-tab" data-view="pipeline"><span>↝</span>Pipeline</button>
+    <button class="nav-tab" data-view="interviews"><span>◉</span>Interviews</button>
+  </nav>
+  <div class="sidebar-bottom side-nav">
+    <a href="index.html"><span>↗</span>Applicant site</a>
+    <button id="logout"><span>⇥</span>Sign out</button>
+  </div>
+</aside>
+
+<main class="admin-main">
+<header class="admin-header">
+  <div><span class="section-index">RECRUITMENT DASHBOARD</span><h1 id="pageTitle">Housekeeping applicants</h1></div>
+  <div class="admin-user"><span class="avatar">A</span><div><b>Admin001</b><small>Azzurro Hotels</small></div></div>
+</header>
+
+<section class="metrics">
+  <div class="metric"><span>TOTAL APPLICANTS</span><b id="total">—</b></div>
+  <div class="metric"><span>INTERVIEW COMPLETE</span><b id="complete">—</b></div>
+  <div class="metric"><span>SHORTLISTED</span><b id="shortlisted">—</b></div>
+  <div class="metric"><span>FOR TRIAL</span><b id="trial">—</b></div>
+</section>
+
+<section id="view-applicants" class="workspace-view active">
+  <section class="panel">
+    <div class="panel-head"><div><h2>Applicants</h2><p>Search, filter and review every submission.</p></div><button id="refreshApplicants" class="button button-primary">Refresh</button></div>
+    <div class="filters">
+      <input id="applicantSearch" placeholder="Search name or email">
+      <select id="applicantStatus"><option value="">All statuses</option><option>New</option><option>For Review</option><option>Shortlisted</option><option>Trial</option><option>Hired</option><option>Rejected</option></select>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Applicant</th><th>Mobile</th><th>WhatsApp</th><th>Location</th><th>Experience</th><th>Interview</th><th>Status</th><th></th></tr></thead><tbody id="applicantRows"></tbody></table>
+      <div id="applicantEmpty" class="empty hidden">No applicants found.</div>
+    </div>
+  </section>
+</section>
+
+<section id="view-pipeline" class="workspace-view">
+  <div class="pipeline-toolbar"><div><h2>Hiring pipeline</h2><p>Move applicants through the recruitment process. Changes save immediately.</p></div><button id="refreshPipeline" class="button button-primary">Refresh</button></div>
+  <div id="pipelineBoard" class="pipeline-board"></div>
+</section>
+
+<section id="view-interviews" class="workspace-view">
+  <section class="panel">
+    <div class="panel-head"><div><h2>Video interviews</h2><p>Review completed and in-progress interviews.</p></div><button id="refreshInterviews" class="button button-primary">Refresh</button></div>
+    <div class="filters">
+      <input id="interviewSearch" placeholder="Search applicant">
+      <select id="interviewFilter"><option value="">All interviews</option><option value="complete">Completed 5/5</option><option value="incomplete">Incomplete</option></select>
+    </div>
+    <div id="interviewGrid" class="interview-grid"></div>
+    <div id="interviewEmpty" class="empty hidden">No interviews found.</div>
+  </section>
+</section>
+</main>
+</div>
+
+<div id="reviewBackdrop" class="modal-backdrop hidden">
+<section class="review-modal">
+<header class="review-head"><div><span class="section-index">APPLICANT REVIEW</span><h2 id="reviewName">Applicant</h2></div><button id="closeReview" class="close">×</button></header>
+<div id="reviewLoading" class="loading">Loading application…</div>
+<div id="reviewBody" class="review-body hidden">
+  <div>
+    <article class="review-card"><h3>Applicant details</h3><div id="detailList" class="detail-list"></div><button id="resumeBtn" class="button button-secondary resume-link">Open resume ↗</button></article>
+    <article class="review-card" style="margin-top:16px"><h3>Decision & notes</h3><div class="status-controls"><select id="reviewStatus"><option>New</option><option>For Review</option><option>Shortlisted</option><option>Trial</option><option>Hired</option><option>Rejected</option></select><textarea id="reviewNotes" placeholder="Internal manager notes…"></textarea><button id="saveReview" class="button button-primary">Save review</button></div></article>
+  </div>
+  <article class="review-card"><h3>Video interview</h3><div id="videoAnswers"></div></article>
+</div>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+const sb=window.supabase.createClient(AZZURRO_CONFIG.SUPABASE_URL,AZZURRO_CONFIG.SUPABASE_ANON_KEY);
+const STATUSES=["New","For Review","Shortlisted","Trial","Hired","Rejected"];
+let apps=[],responses=[],responseCounts={},activeApplicant=null,draggedApplicantId=null;
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const initials=a=>esc((a.first_name?.[0]||"")+(a.last_name?.[0]||""));
+const formatDate=v=>{try{return new Intl.DateTimeFormat("en-AU",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(v))}catch{return"—"}};
+
+async function guard(){
+ const {data}=await sb.auth.getSession();
+ if(!data.session){location.href="admin-login.html";return false}
+ if((data.session.user.email||"").toLowerCase()!=="admin001@azzurro.local"){await sb.auth.signOut();location.href="admin-login.html";return false}
+ return true;
+}
+
+async function loadData(){
+ if(!(await guard()))return;
+ const [{data:a,error:ae},{data:r,error:re}]=await Promise.all([
+  sb.from("applications").select("*").order("created_at",{ascending:false}),
+  sb.from("interview_responses").select("*").order("question_number",{ascending:true})
+ ]);
+ if(ae||re){console.error(ae||re);alert("Could not load recruitment data.");return}
+ apps=a||[];responses=r||[];responseCounts={};
+ responses.forEach(x=>responseCounts[x.application_id]=(responseCounts[x.application_id]||0)+1);
+ renderAll();
+}
+
+function renderAll(){
+ document.getElementById("total").textContent=apps.length;
+ document.getElementById("complete").textContent=apps.filter(a=>(responseCounts[a.id]||0)===5).length;
+ document.getElementById("shortlisted").textContent=apps.filter(a=>a.status==="Shortlisted").length;
+ document.getElementById("trial").textContent=apps.filter(a=>a.status==="Trial").length;
+ renderApplicants();renderPipeline();renderInterviews();
+}
+
+function switchView(view){
+ document.querySelectorAll(".workspace-view").forEach(v=>v.classList.remove("active"));
+ document.getElementById(`view-${view}`).classList.add("active");
+ document.querySelectorAll(".nav-tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
+ document.getElementById("pageTitle").textContent={applicants:"Housekeeping applicants",pipeline:"Hiring pipeline",interviews:"Video interviews"}[view];
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".nav-tab").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
+
+function bindReviewButtons(){document.querySelectorAll("[data-review]").forEach(b=>b.onclick=()=>openReview(b.dataset.review))}
+
+function renderApplicants(){
+ const q=document.getElementById("applicantSearch").value.toLowerCase(),st=document.getElementById("applicantStatus").value;
+ const filtered=apps.filter(a=>(!st||a.status===st)&&(`${a.first_name} ${a.last_name} ${a.email}`.toLowerCase().includes(q)));
+ document.getElementById("applicantRows").innerHTML=filtered.map(a=>`<tr>
+ <td><div class="person"><span class="avatar">${initials(a)}</span><div><b>${esc(a.first_name)} ${esc(a.last_name)}</b><small>${esc(a.email)}</small></div></div></td>
+ <td>${esc(a.mobile||"—")}</td><td>${esc(a.whatsapp||"—")}</td><td>${esc(a.suburb||"—")}</td><td>${esc(a.experience||"—")}</td>
+ <td>${responseCounts[a.id]||0} / 5</td><td><span class="badge">${esc(a.status||"New")}</span></td><td><button class="review-btn" data-review="${esc(a.id)}">Review →</button></td>
+ </tr>`).join("");
+ document.getElementById("applicantEmpty").classList.toggle("hidden",filtered.length>0);bindReviewButtons();
+}
+
+function pipelineCard(a){
+ const count=responseCounts[a.id]||0;
+ return `<article class="candidate-card" draggable="true" data-id="${esc(a.id)}">
+ <div class="candidate-top"><span class="avatar">${initials(a)}</span><div><h4>${esc(a.first_name)} ${esc(a.last_name)}</h4><small>${esc(a.suburb||"Location not provided")}</small></div></div>
+ <div class="candidate-meta"><div><span>Experience</span><b>${esc(a.experience||"—")}</b></div><div><span>Interview</span><b>${count} / 5</b></div><div><span>Applied</span><b>${formatDate(a.created_at)}</b></div></div>
+ <div class="candidate-actions"><select data-move-id="${esc(a.id)}">${STATUSES.map(s=>`<option ${s===(a.status||"New")?"selected":""}>${esc(s)}</option>`).join("")}</select><button data-review="${esc(a.id)}">Review</button></div>
+ </article>`;
+}
+
+function renderPipeline(){
+ document.getElementById("pipelineBoard").innerHTML=STATUSES.map(status=>{
+  const list=apps.filter(a=>(a.status||"New")===status);
+  return `<section class="pipeline-column"><div class="pipeline-column-header"><h3>${status}</h3><span class="pipeline-count">${list.length}</span></div><div class="pipeline-dropzone" data-status="${status}">${list.map(pipelineCard).join("")}</div></section>`;
+ }).join("");
+ document.querySelectorAll(".candidate-card").forEach(card=>{
+  card.addEventListener("dragstart",()=>{draggedApplicantId=card.dataset.id;card.style.opacity=".55"});
+  card.addEventListener("dragend",()=>{draggedApplicantId=null;card.style.opacity="1";document.querySelectorAll(".pipeline-dropzone").forEach(z=>z.classList.remove("dragover"))});
+ });
+ document.querySelectorAll(".pipeline-dropzone").forEach(zone=>{
+  zone.addEventListener("dragover",e=>{e.preventDefault();zone.classList.add("dragover")});
+  zone.addEventListener("dragleave",()=>zone.classList.remove("dragover"));
+  zone.addEventListener("drop",async e=>{e.preventDefault();zone.classList.remove("dragover");if(draggedApplicantId)await updateStatus(draggedApplicantId,zone.dataset.status)});
+ });
+ document.querySelectorAll("[data-move-id]").forEach(s=>s.addEventListener("change",()=>updateStatus(s.dataset.moveId,s.value)));
+ bindReviewButtons();
+}
+
+async function updateStatus(id,status){
+ const a=apps.find(x=>x.id===id);if(!a||a.status===status)return;
+ const old=a.status;a.status=status;renderAll();
+ const {error}=await sb.from("applications").update({status}).eq("id",id);
+ if(error){console.error(error);a.status=old;renderAll();alert("Could not update status.");}
+}
+
+function renderInterviews(){
+ const q=document.getElementById("interviewSearch").value.toLowerCase(),f=document.getElementById("interviewFilter").value;
+ const filtered=apps.filter(a=>{
+  const c=responseCounts[a.id]||0,match=`${a.first_name} ${a.last_name} ${a.email}`.toLowerCase().includes(q);
+  return match&&(!f||(f==="complete"&&c===5)||(f==="incomplete"&&c<5));
+ });
+ document.getElementById("interviewGrid").innerHTML=filtered.map(a=>{
+  const c=responseCounts[a.id]||0,p=Math.round(c/5*100);
+  return `<article class="interview-card"><div class="interview-card-top"><div><h3>${esc(a.first_name)} ${esc(a.last_name)}</h3><p>${esc(a.email)}</p></div><span class="badge">${esc(a.status||"New")}</span></div><div class="interview-progress"><div class="interview-bar"><i style="width:${p}%"></i></div><b>${c}/5</b></div><div class="interview-details"><div><span>APPLIED</span><b>${formatDate(a.created_at)}</b></div><div><span>EXPERIENCE</span><b>${esc(a.experience||"—")}</b></div></div><button class="button ${c?"button-primary":"button-secondary"} full" data-review="${esc(a.id)}">${c===5?"Review interview →":c?`View ${c} answers →`:"View application →"}</button></article>`;
+ }).join("");
+ document.getElementById("interviewEmpty").classList.toggle("hidden",filtered.length>0);bindReviewButtons();
+}
+
+async function signed(bucket,path){
+ if(!path)return null;
+ const {data,error}=await sb.storage.from(bucket).createSignedUrl(path,3600);
+ if(error){console.error(error);return null}
+ return data.signedUrl;
+}
+
+async function openReview(id){
+ activeApplicant=apps.find(a=>a.id===id);if(!activeApplicant)return;
+ document.getElementById("reviewBackdrop").classList.remove("hidden");document.body.style.overflow="hidden";
+ document.getElementById("reviewName").textContent=`${activeApplicant.first_name} ${activeApplicant.last_name}`;
+ document.getElementById("reviewLoading").classList.remove("hidden");document.getElementById("reviewBody").classList.add("hidden");
+ document.getElementById("detailList").innerHTML=[["Email",activeApplicant.email],["Mobile",activeApplicant.mobile],["WhatsApp",activeApplicant.whatsapp],["Suburb",activeApplicant.suburb],["Experience",activeApplicant.experience],["Weekends",activeApplicant.weekends?"Yes":"No"],["Public holidays",activeApplicant.public_holidays?"Yes":"No"],["Most days",activeApplicant.most_days?"Yes":"No"],["Start date",activeApplicant.start_date||"Not provided"],["Work rights",activeApplicant.australian_work_rights?"Yes":"No"],["TFN",activeApplicant.tfn_eligible?"Yes":"No"]].map(([k,v])=>`<div><span>${esc(k)}</span><b>${esc(v||"—")}</b></div>`).join("");
+ const resumeUrl=await signed("resumes",activeApplicant.resume_path),resumeBtn=document.getElementById("resumeBtn");resumeBtn.disabled=!resumeUrl;resumeBtn.onclick=()=>resumeUrl&&window.open(resumeUrl,"_blank","noopener");
+ document.getElementById("reviewStatus").value=activeApplicant.status||"New";document.getElementById("reviewNotes").value=activeApplicant.admin_notes||"";
+ const cards=[];for(const r of responses.filter(x=>x.application_id===id).sort((a,b)=>a.question_number-b.question_number)){const url=await signed("interview-videos",r.video_path);cards.push(`<div class="video-answer"><span class="qnum">QUESTION ${r.question_number} · ${esc(r.category)}</span><p>${esc(r.question)}</p>${url?`<video controls playsinline preload="metadata" src="${url}"></video>`:`<div class="empty">Video unavailable</div>`}</div>`)}
+ document.getElementById("videoAnswers").innerHTML=cards.length?cards.join(""):'<div class="empty">No interview answers uploaded yet.</div>';
+ document.getElementById("reviewLoading").classList.add("hidden");document.getElementById("reviewBody").classList.remove("hidden");
+}
+
+function closeReview(){document.getElementById("reviewBackdrop").classList.add("hidden");document.body.style.overflow="";document.querySelectorAll("#videoAnswers video").forEach(v=>{v.pause();v.removeAttribute("src");v.load()});activeApplicant=null}
+document.getElementById("closeReview").addEventListener("click",closeReview);
+document.getElementById("reviewBackdrop").addEventListener("click",e=>{if(e.target===e.currentTarget)closeReview()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeReview()});
+document.getElementById("saveReview").addEventListener("click",async()=>{
+ if(!activeApplicant)return;const btn=document.getElementById("saveReview");btn.disabled=true;btn.textContent="Saving…";
+ const status=document.getElementById("reviewStatus").value,admin_notes=document.getElementById("reviewNotes").value;
+ const {error}=await sb.from("applications").update({status,admin_notes}).eq("id",activeApplicant.id);
+ if(error){console.error(error);alert("Could not save review.");btn.disabled=false;btn.textContent="Save review";return}
+ activeApplicant.status=status;activeApplicant.admin_notes=admin_notes;renderAll();btn.textContent="Saved ✓";setTimeout(()=>{btn.textContent="Save review";btn.disabled=false},1000);
+});
+
+document.getElementById("applicantSearch").addEventListener("input",renderApplicants);
+document.getElementById("applicantStatus").addEventListener("change",renderApplicants);
+document.getElementById("interviewSearch").addEventListener("input",renderInterviews);
+document.getElementById("interviewFilter").addEventListener("change",renderInterviews);
+["refreshApplicants","refreshPipeline","refreshInterviews"].forEach(id=>document.getElementById(id).addEventListener("click",loadData));
+async function logout(){await sb.auth.signOut();location.href="admin-login.html"}
+document.getElementById("logout").addEventListener("click",logout);document.getElementById("mobileLogout").addEventListener("click",logout);
+loadData();
+</script>
+</body>
+</html>
